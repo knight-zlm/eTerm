@@ -1,6 +1,8 @@
 package model
 
-import "time"
+import (
+	"time"
+)
 
 type Machine struct {
 	Id        uint      `gorm:"primary_key" json:"id" form:"id"`
@@ -26,19 +28,19 @@ func MachineAdd(name, addr, ip, user, password, key, auth string, port uint) err
 func MachineAll(search string) ([]Machine, error) {
 	//db.Order("")
 	var resp []Machine
+	query := db
 	if search != "" {
-		db.Where("name like ?", "%"+search+"%")
+		query = db.Where("name like ? or host like ?", "%"+search+"%", "%"+search+"%")
 	}
 
-	err := db.Find(&resp).Error
+	err := query.Find(&resp).Error
 	return resp, err
 }
 
 // MachineAll 查询所有的数据
 func GetMachineByID(id int) (*Machine, error) {
 	var resp Machine
-	db.Where("id = ?", id)
+	err := db.Where("id = ?", id).First(&resp).Error
 
-	err := db.First(&resp).Error
 	return &resp, err
 }

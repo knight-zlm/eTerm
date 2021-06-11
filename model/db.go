@@ -40,7 +40,7 @@ func init() {
 	}
 }
 
-func CreateSQLiteDb() {
+func CreateSQLiteDb(isDebug bool) {
 	log.Printf("SQLite path:%v", dbPath)
 	sqlite, err := gorm.Open("sqlite3", dbPath)
 	if err != nil {
@@ -52,7 +52,7 @@ func CreateSQLiteDb() {
 	// 保持数据库字段和mode的字段一致
 	db.AutoMigrate(Machine{})
 	// 查看详细的sql日志
-	//db.LogMode(true)
+	db.LogMode(isDebug)
 }
 
 // 删除数据库
