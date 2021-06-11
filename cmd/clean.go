@@ -1,9 +1,10 @@
 package cmd
 
 import (
+	"log"
+
 	"github.com/knight-zlm/eTerm/model"
 	"github.com/spf13/cobra"
-	"log"
 )
 
 var cleanCmd = &cobra.Command{

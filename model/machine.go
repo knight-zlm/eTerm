@@ -22,7 +22,7 @@ func MachineAdd(name, addr, ip, user, password, key, auth string, port uint) err
 	return db.Create(ins).Error
 }
 
-// 
+// MachineAll 查询所有的数据
 func MachineAll(search string) ([]Machine, error) {
 	//db.Order("")
 	var resp []Machine
@@ -32,4 +32,13 @@ func MachineAll(search string) ([]Machine, error) {
 
 	err := db.Find(&resp).Error
 	return resp, err
+}
+
+// MachineAll 查询所有的数据
+func GetMachineByID(id int) (*Machine, error) {
+	var resp Machine
+	db.Where("id = ?", id)
+
+	err := db.First(&resp).Error
+	return &resp, err
 }
