@@ -26,7 +26,7 @@ func init() {
 	addSSHCmd.Flags().StringVarP(&name, "name", "n", "", "显示名称")
 	addSSHCmd.Flags().StringVarP(&addr, "addr", "a", "", "远端的ip:port 或者 domain")
 	addSSHCmd.Flags().StringVarP(&ip, "ip", "", "", "远端的ip")
-	addSSHCmd.Flags().StringVarP(&user, "user", "u", "", "登陆的用户名")
+	addSSHCmd.Flags().StringVarP(&user, "user", "u", "root", "登陆的用户名")
 	addSSHCmd.Flags().StringVarP(&password, "password", "p", "", "远端的登陆密码")
 	addSSHCmd.Flags().StringVarP(&key, "key", "k", "~/.ssh/id_rsa", "远端登陆用的密钥文件路径")
 	addSSHCmd.Flags().StringVarP(&auth, "auth", "", "password", "远端登陆的类型,密码(password)或者密钥(key)")

@@ -6,6 +6,7 @@ import (
 	"path"
 
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/sqlite"
 	"github.com/mitchellh/go-homedir"
 	"github.com/sirupsen/logrus"
 )
@@ -16,23 +17,32 @@ var dbPath string
 func init() {
 	dir, err := homedir.Dir()
 	if err != nil {
-		log.Printf("get home dir err:%v", err)
+		log.Fatalf("get home dir err:%v", err)
 	}
 
 	dbPath = path.Join(dir, ".eTerm/sqlite.db")
 	// 如果不存在是不是要新建文件
 	if !IsExistByPath(dbPath) {
+		// 判断目录是否存在
+		fPath := path.Dir(dbPath)
+		if !IsExistByPath(fPath) {
+			if err := os.MkdirAll(fPath, os.ModePerm); err != nil {
+				log.Fatalf("create sqlite db path err:%v", err)
+			}
+		}
+
+		// 新建文件
 		file, err := os.Create(dbPath)
 		if err != nil {
-			log.Printf("create sqlite db path err:%v", err)
+			log.Fatalf("create sqlite db path err:%v", err)
 		}
 		file.Close()
 	}
 }
 
 func CreateSQLiteDb() {
-	log.Printf("start create SQLite path:%v", dbPath)
-	sqlite, err := gorm.Open("sqlite", dbPath)
+	log.Printf("SQLite path:%v", dbPath)
+	sqlite, err := gorm.Open("sqlite3", dbPath)
 	if err != nil {
 		logrus.WithError(err).Fatalf("master fail to open its sqlite db in %s. please install master first.", dbPath)
 		return
