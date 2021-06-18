@@ -37,10 +37,16 @@ func MachineAll(search string) ([]Machine, error) {
 	return resp, err
 }
 
-// MachineAll 查询所有的数据
+// GetMachineByID 查询所有的数据
 func GetMachineByID(id int) (*Machine, error) {
 	var resp Machine
 	err := db.Where("id = ?", id).First(&resp).Error
 
 	return &resp, err
+}
+
+// DelMachineByID 通过Id删除信息
+func DelMachineByID(id int) error {
+
+	return db.Where("id = ?", id).Delete(&Machine{}).Error
 }

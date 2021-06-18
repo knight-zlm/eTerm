@@ -26,7 +26,7 @@ or just go build run binary by ./eterm
 - [x] 展示连接信息
 - [x] 清除所有连接信息
 - [x] 通过id号连接远程机器
+- [x] 根据id删除记录
 
-# To List
-- [ ] 根据id删除记录
+# ToDo List
 - [ ] 记录的导出和倒入
