@@ -14,7 +14,7 @@ var delSSHCmd = &cobra.Command{
 	Long:  `del a ssh connection configuration by id,usage: eterm del 1, list all id by eterm ls`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) == 0 {
-			machine.PrintAllMachines("")
+			machine.PrintAllMachines("", false)
 			return
 		}
 		// 通过id查询到ssh信息
@@ -31,7 +31,7 @@ var delSSHCmd = &cobra.Command{
 		}
 
 		// 展示一下删除后的结果
-		machine.PrintAllMachines("")
+		machine.PrintAllMachines("", false)
 	},
 }
 

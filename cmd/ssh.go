@@ -14,7 +14,7 @@ var sshCmd = &cobra.Command{
 	Long:  "open a ssh terminal by id, usage: eterm ssh 1, list all id by eterm ls",
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) == 0 {
-			machine.PrintAllMachines("")
+			machine.PrintAllMachines("", false)
 			return
 		}
 
